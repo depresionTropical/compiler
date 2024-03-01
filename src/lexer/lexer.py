@@ -1,5 +1,6 @@
 # /src/lexer/lexer.py
 import re
+import csv 
 
 identifier = r'^_[A-Za-z]+[0-9]*$'
 decimal = r'^decimal$'
@@ -26,13 +27,15 @@ regex_patterns = {
 def match_token(token: str, prev_token: str):
     for pattern, data_type in regex_patterns.items():
         if re.match(pattern, token):
-            if data_type == 'identifier':
-                if re.match(r'^_[A-Za-z]+[0-9]*$', token):
-                    return 'numero' if prev_token == 'palabra' else 'palabra'
-                else:
+            if re.match(r'^_[A-Za-z]+[0-9]*$', token):
+                if prev_token == 'palabra':
                     return 'palabra'
-            return data_type
-    return ''
+                elif prev_token == 'numero':
+                    return 'numero'
+                elif prev_token == 'decimal':
+                    return 'decimal'
+            else:
+                return data_type
 
 def tokenize(source_code: list[list[str]]):
     tokens = {}
@@ -45,6 +48,8 @@ def tokenize(source_code: list[list[str]]):
             prev_token = word
 
     return tokens
+
+
 
 
 if __name__ == "__main__":

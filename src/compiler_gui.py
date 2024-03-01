@@ -5,6 +5,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from main_compiler import first_pass, second_pass
+import csv
 
 class CompilerGUI:
     def __init__(self, root):
@@ -25,20 +26,45 @@ class CompilerGUI:
             self.file_path = file_path
             print(f"Archivo seleccionado: {self.file_path}")
 
+    def save_tokens_to_csv(self, table:dict, type, file_name):
+        csv_data = []
+        if type == 'compiler':
+            for token, token_type in table.items():
+                csv_data.append({
+                    'Token': token,
+                    'Tipo': token_type
+                })
+        elif type == 'error':
+            for error in table:
+                csv_data.append({
+                    'Token de error': error['Token de error'],
+                    'Línea': error['Línea'],
+                    'Lexema': error['Lexema'],
+                    'Descripción': error['Descripción']
+                })
+
+        csv_file_path = f"{file_name}_{type}.csv"
+        with open(csv_file_path, 'w', newline='') as csv_file:
+            if csv_data:  
+                fieldnames = csv_data[0].keys()
+                writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+                writer.writeheader()
+                writer.writerows(csv_data)
+
+        print(f"Tokens guardados en {csv_file_path}")
+
     def compile(self):
         if self.file_path:
             with open(self.file_path, "r") as file:
-                # line = file.readline()
-                # print(line.split())
                 source_code = [line.split() for line in file.readlines()]
 
             symbol_table = first_pass(source_code)
-            error_table = second_pass(source_code)
-
-            # Aquí puedes hacer algo con las tablas generadas
-            # print("Tabla de Símbolos:", symbol_table.symbol_table)
-            # print("Tabla de Errores:", error_table.error_table)
-        else:
+            self.save_tokens_to_csv(table=symbol_table,type='compiler',file_name=self.file_path)
+            error_table = second_pass(source_code = source_code, symbol_table = symbol_table)
+            
+            self.save_tokens_to_csv(table=error_table,type='error',file_name=self.file_path)
+           
             print("Por favor, selecciona un archivo antes de compilar")
 
 def main():
