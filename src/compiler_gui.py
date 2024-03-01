@@ -28,14 +28,16 @@ class CompilerGUI:
     def compile(self):
         if self.file_path:
             with open(self.file_path, "r") as file:
-                source_code = file.read()
+                # line = file.readline()
+                # print(line.split())
+                source_code = [line.split() for line in file.readlines()]
 
             symbol_table = first_pass(source_code)
             error_table = second_pass(source_code)
 
             # Aquí puedes hacer algo con las tablas generadas
-            print("Tabla de Símbolos:", symbol_table.symbol_table)
-            print("Tabla de Errores:", error_table.error_table)
+            # print("Tabla de Símbolos:", symbol_table.symbol_table)
+            # print("Tabla de Errores:", error_table.error_table)
         else:
             print("Por favor, selecciona un archivo antes de compilar")
 
