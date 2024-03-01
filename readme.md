@@ -8,6 +8,21 @@ Se recomienda el uso de un entorno virtual para gestionar las dependencias del p
 
 ```bash
 python3.10 -m venv env
-```
-```bash
 source env/bin/activate
+```
+
+
+
+
+## Instalación de dependencias 
+Las dependencias del proyecto están especificadas en el archivo requirements.txt. Puedes instalarlas utilizando pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Estructura del proyecto
+-
+-
+-
+## Ejecución del compilador
