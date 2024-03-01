@@ -5,6 +5,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from main_compiler import first_pass, second_pass
+import csv
 
 class CompilerGUI:
     def __init__(self, root):
@@ -25,6 +26,24 @@ class CompilerGUI:
             self.file_path = file_path
             print(f"Archivo seleccionado: {self.file_path}")
 
+    def save_symbol_table_to_csv(self, symbol_table, file_name):
+        csv_data = []
+        for lexema, tipo in symbol_table.items():
+            csv_data.append({
+                'Lexema': lexema,
+                'Tipo': tipo
+            })
+
+        csv_file_path = f"{file_name}_symbol_table.csv"
+        with open(csv_file_path, 'w', newline='') as csv_file:
+            fieldnames = ['Lexema', 'Tipo']
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+            writer.writeheader()
+            writer.writerows(csv_data)
+
+        print(f"Tabla de Símbolos guardada en {csv_file_path}")
+
     def compile(self):
         if self.file_path:
             with open(self.file_path, "r") as file:
@@ -33,6 +52,8 @@ class CompilerGUI:
                 source_code = [line.split() for line in file.readlines()]
 
             symbol_table = first_pass(source_code)
+            self.save_symbol_table_to_csv(symbol_table, file_name=self.file_path)
+
             error_table = second_pass(source_code)
 
             # Aquí puedes hacer algo con las tablas generadas

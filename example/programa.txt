@@ -1,0 +1,2 @@
+numero _der3 , _Der02 , _qwr02 ;
+_qwr02 = _Der02 * _der3 ;

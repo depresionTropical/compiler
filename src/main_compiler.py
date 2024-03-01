@@ -9,8 +9,6 @@ def first_pass(source_code: list[str], symbol_table=SymbolTable()):
     print(tokens)
     return tokens
 def second_pass(source_code, error_table=ErrorTable()):
-    # Realizar la segunda pasada para construir la tabla de errores
-    # Implementar la lógica según los requerimientos específicos
     pass
 
 def main():

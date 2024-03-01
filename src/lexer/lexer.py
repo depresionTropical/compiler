@@ -26,13 +26,10 @@ regex_patterns = {
 def match_token(token: str, prev_token: str):
     for pattern, data_type in regex_patterns.items():
         if re.match(pattern, token):
-            if data_type == 'identifier':
-                if re.match(r'^_[A-Za-z]+[0-9]*$', token):
-                    return 'numero' if prev_token == 'palabra' else 'palabra'
-                else:
-                    return 'palabra'
             return data_type
     return ''
+
+
 
 def tokenize(source_code: list[list[str]]):
     tokens = {}
@@ -42,10 +39,9 @@ def tokenize(source_code: list[list[str]]):
         for word in line:
             data_type = match_token(word, prev_token)
             tokens[word] = data_type
-            prev_token = word
+            prev_token = data_type
 
     return tokens
-
 
 if __name__ == "__main__":
     source_code = [
