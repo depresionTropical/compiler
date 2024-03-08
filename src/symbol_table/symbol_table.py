@@ -28,8 +28,14 @@ class SymbolTable:
                     self.add_symbol(self.table_list[line][word],'')
                     continue
                 if (data_type !=  None) and type_word == 'identifier':
+                    if data_type == 'identifier':
+                        data_type = None
                     self.add_symbol(self.table_list[line][word], data_type)
-                if not type_word is None:
+                if (data_type ==  'identifier') and type_word == 'identifier':
+                    self.add_symbol(self.table_list[line][word], None)
+                if  type_word != None:
+                    if type_word == 'identifier':
+                        type_word = None
                     self.add_symbol(self.table_list[line][word],type_word)
                 else:
                     self.add_symbol(self.table_list[line][word],'')

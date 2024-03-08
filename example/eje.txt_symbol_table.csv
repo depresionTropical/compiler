@@ -5,8 +5,8 @@ _num01,numero
 _num02,numero
 _num03,numero
 ;,
-palabra,
-_palabra01,palabra
 =,
 +,
-_palara01,identifier
+_palara01,
+palabra,
+_palabra01,palabra
