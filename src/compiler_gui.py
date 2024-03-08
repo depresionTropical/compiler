@@ -56,7 +56,7 @@ class CompilerGUI:
             symbol_table = first_pass(source_code)
             self.save_symbol_table_to_csv(symbol_table, file_name=self.file_path)
 
-            error_table = second_pass(source_code)
+            error_table = second_pass(source_code, symbol_table.get_table())
 
             # Aquí puedes hacer algo con las tablas generadas
             # print("Tabla de Símbolos:", symbol_table.symbol_table)

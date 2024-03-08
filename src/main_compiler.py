@@ -9,8 +9,8 @@ def first_pass(source_code: list[str]):
     
     return symbol_table
 def second_pass(source_code: list[list[str]],symbol_table: dict[str,str]):
-    error_table = ErrorTable()
-    pass
+    error_table = ErrorTable(source_code,symbol_table)
+    return error_table
 
 def main():
     # Leer el código fuente desde un archivo u otra fuente

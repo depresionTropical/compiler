@@ -1,7 +1,7 @@
 Lexema,Tipo
 numero,
 _A1,numero
-=,
+=,igual
 _A2,numero
 +,operador
 _A3,numero
