@@ -25,26 +25,29 @@ class ErrorTable:
         print(line)
         index_eq = line.index('=')
         index_op = line.index('+') if line.count('+') > 0 else line.index('-') if line.count('-') > 0 else line.index('/') if line.count('/') > 0 else -1
-        result= self.symbol_table.get(line[index_eq-1])
-        left = self.symbol_table.get(str(line[index_eq+1:index_op]))
-        right = self.symbol_table.get(str(line[index_op+1:-1]))
+        token_result=line[index_eq-1]
+        token_left=line[index_eq+1:index_op][0]
+        token_right=line[index_op+1:-1][0]
+        result= self.symbol_table.get(token_result)
+        left = self.symbol_table.get(token_left)
+        right = self.symbol_table.get(token_right)
         # print(f'{line[index_eq-1]}')
         # print(f'{line[index_eq+1:index_op]}')
         # print(f'{line[index_op+1:-1]}')
 
         # str
         if result == 'palabra' and (left != 'palabra' or right != 'palabra'):
-            erro_token = left if left != 'palabra' else right
+            erro_token = token_left if left != 'palabra' else token_right
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de palabra')
         # int
         if result == 'numero' and (left != 'numero' or right != 'numero'):
-            erro_token = left if left != 'numero' else right
-            print(f'{line[index_eq-1]} : {result} {line[index_eq+1:index_op]} : {left} {line[index_op+1:-1]} : {right}')
-            print(erro_token)
+            erro_token = token_left if left != 'numero' else token_right
+            # print(f'{line[index_eq-1]} : {result} {str(line[index_eq+1:index_op])} : {left} {str(line[index_op+1:-1])} : {right}')
+            # print(erro_token)
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de numero')
         # float
         if result == 'decimal' and (left != 'decimal' or right != 'decimal'):
-            erro_token = left if left != 'decimal' else right
+            erro_token = token_left if left != 'decimal' else token_right
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de decimal')
 
     def get_table(self):
