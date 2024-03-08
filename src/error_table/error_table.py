@@ -46,22 +46,23 @@ class ErrorTable:
         # print(f'{line[index_op+1:-1]}')
 
         # str
-        if result == 'palabra' and (left != 'palabra' or right != 'palabra'):
+        if result == None or left == None or right == None:
+            erro_token = token_right if left != None  else token_left
+            self.add_error(num_line,erro_token,'Token no declarado')
+        elif result == 'palabra' and (left != 'palabra' or right != 'palabra'):
             erro_token = token_left if left != 'palabra' else token_right
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de palabra')
         # int
-        if result == 'numero' and (left != 'numero' or right != 'numero'):
+        elif result == 'numero' and (left != 'numero' or right != 'numero'):
             erro_token = token_left if left != 'numero' else token_right
             # print(f'{line[index_eq-1]} : {result} {str(line[index_eq+1:index_op])} : {left} {str(line[index_op+1:-1])} : {right}')
             # print(erro_token)
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de numero')
         # float
-        if result == 'decimal' and (left != 'decimal' or right != 'decimal'):
+        elif result == 'decimal' and (left != 'decimal' or right != 'decimal'):
             erro_token = token_left if left != 'decimal' else token_right
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de decimal')
 
-        if result == None or left == None or right == None:
-            erro_token = token_right if left != None  else token_left
-            self.add_error(num_line,erro_token,'Token no declarado')
+        
     def get_table(self):
         return self.error_table
