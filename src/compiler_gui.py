@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import filedialog
 from main_compiler import first_pass, second_pass
 from symbol_table.symbol_table import SymbolTable
+from error_table.error_table import ErrorTable
 import csv
 
 
@@ -46,6 +47,20 @@ class CompilerGUI:
 
         print(f"Tabla de Símbolos guardada en {csv_file_path}")
 
+    def save_error_table_to_csv(self, error_table: ErrorTable, file_name):
+        
+        csv_file_path = f"{file_name}_error_table.csv"
+        with open(csv_file_path, 'w', newline='') as csv_file:
+            fieldnames = ['Token de error', 'Línea', 'Lexema', 'Descripción']
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+            writer.writeheader()
+            writer.writerows(error_table.get_table())
+
+        print(f"Tabla de Errores guardada en {csv_file_path}")
+
+    
+
     def compile(self):
         if self.file_path:
             with open(self.file_path, "r") as file:
@@ -57,7 +72,7 @@ class CompilerGUI:
             self.save_symbol_table_to_csv(symbol_table, file_name=self.file_path)
 
             error_table = second_pass(source_code, symbol_table.get_table())
-
+            self.save_error_table_to_csv(error_table, file_name=self.file_path)
             # Aquí puedes hacer algo con las tablas generadas
             # print("Tabla de Símbolos:", symbol_table.symbol_table)
             # print("Tabla de Errores:", error_table.error_table)
