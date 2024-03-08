@@ -23,11 +23,15 @@ regex_patterns = {
     ope_re: ''
 }
 
-def match_token(token: str, prev_token: str):
-    for pattern, data_type in regex_patterns.items():
-        if re.match(pattern, token):
-            return data_type
-    return ''
+def match_token(token: str):
+    if re.match(identifier, token):
+        return 'identifier'
+    if re.match(decimal, token):
+        return 'decimal'
+    if re.match(numero, token):
+        return 'numero'
+    if re.match(palabra, token):
+        return 'palabra'
 
 
 
@@ -56,4 +60,5 @@ if __name__ == "__main__":
     ]
 
     tokens = tokenize(source_code)
+    print('Tokens: ')
     print(tokens)
