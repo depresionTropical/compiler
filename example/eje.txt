@@ -2,3 +2,5 @@ numero _num01 , _num02 , _num03 ;
 palabra _palabra01 ;
 _num02 = _num01 + _palabra01 ;
 _num02 = _num01 + _palara01 ;
+_l1 = 89 / _palabra01 ;
+_num01 = _palabra01 * 89 ;

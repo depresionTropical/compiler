@@ -25,7 +25,7 @@ class ErrorTable:
         for line in self.source_code:
             num_line +=1
             # print(line)
-            if line.count('=') > 0 and (line.count('+') >0 or line.count('-') > 0 or line.count('/') > 0) :
+            if line.count('=') > 0 and (line.count('+') >0 or line.count('-') > 0 or line.count('/') > 0 or line.count('*') > 0 or line.count('%') > 0):
                 # for lex in line:
                     # print(lex)
                 self.check_error(line,num_line)
@@ -35,9 +35,11 @@ class ErrorTable:
         print(line)
         index_eq = line.index('=')
         index_op = line.index('+') if line.count('+') > 0 else line.index('-') if line.count('-') > 0 else line.index('/') if line.count('/') > 0 else -1
+        
         token_result=line[index_eq-1]
         token_left=line[index_eq+1:index_op][0]
         token_right=line[index_op+1:-1][0]
+        
         result= self.symbol_table.get(token_result)
         left = self.symbol_table.get(token_left)
         right = self.symbol_table.get(token_right)
@@ -46,8 +48,14 @@ class ErrorTable:
         # print(f'{line[index_op+1:-1]}')
 
         # str
-        if result == None or left == None or right == None:
-            erro_token = token_right if left != None  else token_left
+        if result == None:
+            erro_token = token_result
+            self.add_error(num_line,erro_token,'Token no declarado')
+        elif left == None:
+            erro_token = token_left
+            self.add_error(num_line,erro_token,'Token no declarado')
+        elif right == None:
+            erro_token = token_right
             self.add_error(num_line,erro_token,'Token no declarado')
         elif result == 'palabra' and (left != 'palabra' or right != 'palabra'):
             erro_token = token_left if left != 'palabra' else token_right
