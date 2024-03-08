@@ -60,9 +60,8 @@ class ErrorTable:
             erro_token = token_left if left != 'decimal' else token_right
             self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de decimal')
 
-        # if result == 'numero' and (left == 'palabra' or right == 'palabra'):
-        #     erro_token = token_left if left == 'palabra' else token_right
-        #     self.add_error(num_line,erro_token,'Error de tipo incompatiblidad de palabra')
-
+        if result == None or left == None or right == None:
+            erro_token = token_right if left != None  else token_left
+            self.add_error(num_line,erro_token,'Token no declarado')
     def get_table(self):
         return self.error_table
