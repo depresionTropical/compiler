@@ -1,14 +1,15 @@
 # /src/main_compiler.py
-from lexer.lexer import tokenize
+
 from symbol_table.symbol_table import SymbolTable
 from error_table.error_table import ErrorTable
 
-def first_pass(source_code: list[str], symbol_table=SymbolTable()):
+def first_pass(source_code: list[str]):
     # Realizar la primera pasada para construir la tabla de símbolos
-    tokens = tokenize(source_code)
-    print(tokens)
-    return tokens
-def second_pass(source_code, error_table=ErrorTable()):
+    symbol_table = SymbolTable(source_code)
+    
+    return symbol_table
+def second_pass(source_code: list[list[str]],symbol_table: dict[str,str]):
+    error_table = ErrorTable()
     pass
 
 def main():

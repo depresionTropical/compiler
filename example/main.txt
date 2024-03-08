@@ -1,5 +1,6 @@
 numero _A1 = _A2 + _A3 ;
-palabra _Bueno1 ;
+palabra _Bueno1 = 3 ;
+_A1 = 3 ;
 palabra _Malo1 ;
 decimal _NumeroDecimal1 ;
 palabra _oracion1 = _Bueno1 + _Malo1 ;

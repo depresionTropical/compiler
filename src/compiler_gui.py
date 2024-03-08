@@ -5,7 +5,9 @@
 import tkinter as tk
 from tkinter import filedialog
 from main_compiler import first_pass, second_pass
+from symbol_table.symbol_table import SymbolTable
 import csv
+
 
 class CompilerGUI:
     def __init__(self, root):
@@ -26,9 +28,9 @@ class CompilerGUI:
             self.file_path = file_path
             print(f"Archivo seleccionado: {self.file_path}")
 
-    def save_symbol_table_to_csv(self, symbol_table, file_name):
+    def save_symbol_table_to_csv(self, symbol_table: SymbolTable, file_name):
         csv_data = []
-        for lexema, tipo in symbol_table.items():
+        for lexema, tipo in symbol_table.get_table().items():
             csv_data.append({
                 'Lexema': lexema,
                 'Tipo': tipo
