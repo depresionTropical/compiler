@@ -1,2 +1,4 @@
 Token de error,Línea,Lexema,Descripción
 ES1,3,_palabra01,Error de tipo incompatiblidad de numero
+ES1,3,_palabra01,Error de tipo incompatiblidad de palabra
+ES1,4,_palara01,Error de tipo incompatiblidad de numero

@@ -20,8 +20,6 @@ regex_patterns = {
     str_re: 'palabra',
     int_re: 'numero',
     float_re: 'decimal',
-    ope_re: 'operador',
-    eq_re :'igual'
 }
 
 def match_token(token: str):

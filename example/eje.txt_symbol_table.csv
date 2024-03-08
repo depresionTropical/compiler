@@ -7,5 +7,6 @@ _num03,numero
 ;,
 palabra,
 _palabra01,palabra
-=,igual
-+,operador
+=,
++,
+_palara01,identifier

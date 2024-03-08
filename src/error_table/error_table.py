@@ -58,5 +58,9 @@ class ErrorTable:
             erro_token = token_left if left != 'decimal' else token_right
             self.add_error(n,num_line,erro_token,'Error de tipo incompatiblidad de decimal')
 
+        if result == 'numero' and (left == 'palabra' or right == 'palabra'):
+            erro_token = token_left if left == 'palabra' else token_right
+            self.add_error(n,num_line,erro_token,'Error de tipo incompatiblidad de palabra')
+
     def get_table(self):
         return self.error_table
