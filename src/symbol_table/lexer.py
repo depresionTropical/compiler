@@ -23,25 +23,10 @@ regex_patterns = {
     float_re: 'decimal',
 }
 
-<<<<<<< HEAD:src/symbol_table/lexer.py
 def match_token(token: str):
     for patterns, value  in regex_patterns.items():
         if re.match(patterns,token):
             return value
-=======
-def match_token(token: str, prev_token: str):
-    for pattern, data_type in regex_patterns.items():
-        if re.match(pattern, token):
-            if re.match(r'^_[A-Za-z]+[0-9]*$', token):
-                if prev_token == 'palabra':
-                    return 'palabra'
-                elif prev_token == 'numero':
-                    return 'numero'
-                elif prev_token == 'decimal':
-                    return 'decimal'
-            else:
-                return data_type
->>>>>>> 9075cede4c03c7f348fc47074cd584fa20767f22:src/lexer/lexer.py
 
 
 

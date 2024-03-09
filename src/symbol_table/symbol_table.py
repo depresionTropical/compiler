@@ -9,7 +9,6 @@ class SymbolTable:
         self.token_dict= dict()
         self.tokenizer()
 
-<<<<<<< HEAD
     def add_symbol(self, token:str, data_type:str):
         # Lógica para agregar un símbolo a la tabla
         # print(f"{token} : {data_type}")
@@ -59,9 +58,3 @@ if __name__ == "__main__":
     print(symbol_table.token_dict)
     # print('Tokens: ')
     # print(symbol_table.table_list)
-=======
-    def add_symbol(self, name, value):
-        print(f"Adding symbol {name} with value {value} to the symbol table")
-        pass
-
->>>>>>> 9075cede4c03c7f348fc47074cd584fa20767f22

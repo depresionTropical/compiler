@@ -9,7 +9,6 @@ class ErrorTable:
         self.check_operation()
         
 
-<<<<<<< HEAD
     def add_error(self,line:int, lex:str, messag:str):
         # Lógica para agregar un error a la tabla
         self.error_table.append(
@@ -75,15 +74,3 @@ class ErrorTable:
         
     def get_table(self):
         return self.error_table
-=======
-    def add_error(self, line, column, symbol, expected_type, found_type):
-
-        error_entry = {
-            "Token de error": symbol,
-            "Línea": line,
-            "Lexema": symbol,
-            "Descripción": f"Tipo incorrecto. Se esperaba {expected_type} pero se encontró {found_type}."
-        }
-        self.error_table.append(error_entry)
-
->>>>>>> 9075cede4c03c7f348fc47074cd584fa20767f22
