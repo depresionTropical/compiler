@@ -1,4 +1,4 @@
-from symbol_table.lexer import identifier
+from symbol_table.lexer import identifier, decimal, numero, palabra
 import re
 class Cuadruplo:
     def __init__(self, operador, resultado, fuente1, fuente2):
@@ -14,6 +14,7 @@ class Cuadruplo:
 def expresion_a_cuadruplos(expresion):
     cuadruplos = []
     temp_count = 1
+    palabras_prohibidas = ['decimal', 'numero', 'palabra']
 
     # Función auxiliar para generar un nombre temporal único
     def generar_temp():
@@ -24,11 +25,9 @@ def expresion_a_cuadruplos(expresion):
 
     # Separar la expresión en la variable de destino y la expresión misma
     variable_destino, expresion = expresion.split("=")
-    variable_destino = variable_destino.strip()
-    variable_destino =
+    variable_destino=variable_destino.split()[-1]
     # Convertir la expresión en una lista de tokens
     tokens = expresion.split()
-    print(f'tokens: {variable_destino}')
     pila_operandos = []
     pila_operadores = []
 

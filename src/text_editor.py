@@ -10,8 +10,8 @@ class VisorTexto:
         self.ventana.title("Visor de texto")
 
         # Crear el área de texto
-        self.texto = tk.Text(self.ventana)
-        self.texto.pack(expand=True, fill="both")
+        self.texto = tk.Text(self.ventana, state='normal')
+        self.texto.pack(expand=True, fill="both",)
 
         # Crear un widget Treeview para mostrar los datos de la expresión
         self.tabla_expresion = ttk.Treeview(self.ventana)
@@ -42,6 +42,7 @@ class VisorTexto:
                 contenido = archivo.read()
                 self.texto.delete("1.0", tk.END)  # Limpiar el contenido anterior
                 self.texto.insert(tk.END, contenido)  # Insertar el nuevo contenido
+                # Después de cargar el contenido del archivo, establecer el área de texto como de solo lectura
         except FileNotFoundError:
             self.texto.delete("1.0", tk.END)  # Limpiar el contenido anterior
             self.texto.insert(tk.END, "El archivo no se encontró.")
@@ -49,13 +50,13 @@ class VisorTexto:
             self.texto.delete("1.0", tk.END)  # Limpiar el contenido anterior
             self.texto.insert(tk.END, f"Error al cargar el archivo: {str(e)}")
 
-    def mostrar_contenido_seleccionado(self):
-        # Obtener la línea seleccionada
-        linea_seleccionada = int(self.texto.index(tk.INSERT).split(".")[0])
-        # Obtener el contenido de la línea seleccionada
-        contenido_seleccionado = self.texto.get(f"{linea_seleccionada}.0", f"{linea_seleccionada + 1}.0")
-        # Actualizar el contenido en el widget Label
-        self.contenido_label.config(text=f"Línea {linea_seleccionada}: {contenido_seleccionado.strip()}")
+    # def mostrar_contenido_seleccionado(self):
+    #     # Obtener la línea seleccionada
+    #     linea_seleccionada = int(self.texto.index(tk.INSERT).split(".")[0])
+    #     # Obtener el contenido de la línea seleccionada
+    #     contenido_seleccionado = self.texto.get(f"{linea_seleccionada}.0", f"{linea_seleccionada + 1}.0")
+    #     # Actualizar el contenido en el widget Label
+    #     self.contenido_label.config(text=f"Línea {linea_seleccionada}: {contenido_seleccionado.strip()}")
         
 
     def resaltar_linea(self, event=None):
@@ -141,7 +142,6 @@ class VisorTexto:
         return data
 
     def mostrar_tabla(self, title, data):
-        
         # Crear una nueva ventana secundaria para mostrar la tabla
         ventana_tabla = tk.Toplevel(self.ventana)
         ventana_tabla.title(title)
@@ -156,7 +156,7 @@ class VisorTexto:
 
         # Obtener las cabeceras de las columnas desde la primera fila de datos
         cabeceras = data[0]
-        data_sin_cabeceras = data[1:]
+        data_sin_cabeceras = data[1:]  # Excluir la primera fila de datos (cabeceras)
 
         # Configurar las columnas
         if cabeceras:
@@ -164,9 +164,10 @@ class VisorTexto:
             for columna in cabeceras:
                 tabla.heading(columna, text=columna)
 
-            # Insertar los datos en la tabla
-            for row in data_sin_cabeceras:
-                tabla.insert("", "end", values=row)
+        # Insertar los datos en la tabla (excluyendo las cabeceras)
+        for row in data_sin_cabeceras:
+            tabla.insert("", "end", values=row)
+
 
 
 
