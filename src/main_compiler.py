@@ -22,6 +22,7 @@ def main():
     first_pass(source_code, symbol_table)
 
     second_pass(source_code, error_table)
+    
 
 if __name__ == "__main__":
     main()

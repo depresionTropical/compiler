@@ -1,9 +1,14 @@
+from symbol_table.lexer import identifier
+import re
 class Cuadruplo:
     def __init__(self, operador, resultado, fuente1, fuente2):
         self.operador = operador
         self.resultado = resultado
         self.fuente1 = fuente1
         self.fuente2 = fuente2
+    def __repr__(self) -> identifier:
+        return f"{self.operador} {self.resultado} {self.fuente1} {self.fuente2}"
+        pass
 
 
 def expresion_a_cuadruplos(expresion):
@@ -20,15 +25,15 @@ def expresion_a_cuadruplos(expresion):
     # Separar la expresión en la variable de destino y la expresión misma
     variable_destino, expresion = expresion.split("=")
     variable_destino = variable_destino.strip()
-
+    variable_destino =
     # Convertir la expresión en una lista de tokens
     tokens = expresion.split()
-
+    print(f'tokens: {variable_destino}')
     pila_operandos = []
     pila_operadores = []
 
     for token in tokens:
-        if token.isdigit() or token.isalpha():
+        if token.isdigit() or token.isalpha() or re.match(identifier, token):
             pila_operandos.append(token)
         elif token in '+-*/':
             # Operadores de alta prioridad (*, /)
@@ -65,10 +70,10 @@ def expresion_a_cuadruplos(expresion):
     return cuadruplos
 
 
-# Ejemplo de uso
-expresion = "z = a + b * c - d / f + a * b"
-print(f"Expresión: {expresion}")
-cuadruplos = expresion_a_cuadruplos(expresion)
-for cuadruplo in cuadruplos:
-    print(cuadruplo.operador, cuadruplo.resultado,
-          cuadruplo.fuente1, cuadruplo.fuente2)
+# # Ejemplo de uso
+# expresion = "z = a + b * c - d / f + a * b"
+# print(f"Expresión: {expresion}")
+# cuadruplos = expresion_a_cuadruplos(expresion)
+# for cuadruplo in cuadruplos:
+#     print(cuadruplo.operador, cuadruplo.resultado,
+#           cuadruplo.fuente1, cuadruplo.fuente2)

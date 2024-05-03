@@ -8,6 +8,7 @@ from main_compiler import first_pass, second_pass
 from symbol_table.symbol_table import SymbolTable
 from error_table.error_table import ErrorTable
 import csv
+from text_editor import VisorTexto
 
 
 class CompilerGUI:
@@ -15,19 +16,32 @@ class CompilerGUI:
         self.root = root
         self.root.title("Compileradar GUI")
 
-        self.select_file_button = tk.Button(root, text="Seleccionar Archivo", command=self.select_file)
+        self.select_file_button = tk.Button(
+            root, text="Seleccionar Archivo", command=self.select_file)
         self.select_file_button.pack(pady=10)
 
         self.compile_button = tk.Button(root, text="Compilar", command=self.compile)
+    
         self.compile_button.pack(pady=10)
 
+        self.abrir_visor_button = tk.Button(root, text="Abrir Visor de Texto", command=self.abrir_visor_texto)
+        self.abrir_visor_button.pack(pady=10)
+
         self.file_path = None
+
+    def abrir_visor_texto(self):
+        if self.file_path:
+            visor = VisorTexto(self.root, self.file_path)  # Pasar self.root como la ventana padre
+        else:
+            print("Por favor, selecciona un archivo antes de abrir el visor de texto")
+
 
     def select_file(self):
         file_path = filedialog.askopenfilename(title="Seleccionar Archivo", filetypes=[("Archivos de Texto", "*.txt")])
         if file_path:
             self.file_path = file_path
             print(f"Archivo seleccionado: {self.file_path}")
+        print(self.file_path)
 
     def save_symbol_table_to_csv(self, symbol_table: SymbolTable, file_name):
         csv_data = []
