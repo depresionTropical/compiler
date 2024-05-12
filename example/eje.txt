@@ -1,6 +1,10 @@
 numero _num01 , _num02 , _num03 ;
-palabra _palabra01 ;
-_num02 = _num01 + _palabra01 ;
-_num02 = _num01 + _palara01 ;
-_l1 = 89 / _palabra01 ;
-_num01 = _palabra01 * 89 ;
+decimal _num04 , _num05 ;
+palabra _palabra01 , _palabra02 ;
+_num02 = _num04 + 88 ;
+_num02 = _num01 + 25 ;
+_num05 = 89 / _num04 ;
+_num02 = 8 + 2 / _num9;
+_num01 = _num03 * 89 ;
+_num03 = _num11;
+_palabra01 = _num02 ;

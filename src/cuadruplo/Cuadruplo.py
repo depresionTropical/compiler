@@ -1,11 +1,14 @@
 from symbol_table.lexer import identifier, decimal, numero, palabra
 import re
+
+
 class Cuadruplo:
     def __init__(self, operador, resultado, fuente1, fuente2):
         self.operador = operador
         self.resultado = resultado
         self.fuente1 = fuente1
         self.fuente2 = fuente2
+
     def __repr__(self) -> identifier:
         return f"{self.operador} {self.resultado} {self.fuente1} {self.fuente2}"
         pass
@@ -22,10 +25,12 @@ def expresion_a_cuadruplos(expresion):
         temp_name = f'T{temp_count}'
         temp_count += 1
         return temp_name
-
-    # Separar la expresión en la variable de destino y la expresión misma
-    variable_destino, expresion = expresion.split("=")
-    variable_destino=variable_destino.split()[-1]
+    try:
+        # Separar la expresión en la variable de destino y la expresión misma
+        variable_destino, expresion = expresion.split("=")
+    except:
+        return []
+    variable_destino = variable_destino.split()[-1]
     # Convertir la expresión en una lista de tokens
     tokens = expresion.split()
     pila_operandos = []
